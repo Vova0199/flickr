@@ -1,0 +1,53 @@
+package com.deviark.flickr.DB;
+
+import android.content.Context;
+import android.os.AsyncTask;
+
+import com.deviark.flickr.models.PhotoDBModel;
+
+import androidx.annotation.NonNull;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
+
+@Database(entities = {PhotoDBModel.class}, version = 1, exportSchema = false)
+public abstract class PhotoDatabase extends RoomDatabase {
+
+    private static PhotoDatabase instance;
+
+    public abstract PhotoDAO photoDAO();
+
+    public static synchronized PhotoDatabase getInstance(Context context) {
+        if (instance == null) {
+            instance = Room.databaseBuilder(context.getApplicationContext(),
+                    PhotoDatabase.class, "photo_database")
+                    .fallbackToDestructiveMigration()
+                    .addCallback(roomCallback)
+                    .build();
+        }
+        return instance;
+    }
+
+    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            new PopulateDbAsyncTask(instance).execute();
+        }
+    };
+
+    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
+        private PhotoDAO photoDAO;
+
+        private PopulateDbAsyncTask(PhotoDatabase db) {
+            photoDAO = db.photoDAO();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
+    }
+}
