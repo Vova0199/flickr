@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.deviark.flickr.R;
-import com.deviark.flickr.view.Adapters.FavouriteAdapter;
+import com.deviark.flickr.models.PhotoModel;
+import com.deviark.flickr.view.Adapters.PopularAdapter;
 import com.deviark.flickr.view.DetailsFragment;
-import com.deviark.flickr.models.PhotoDBModel;
 import com.deviark.flickr.view.popular.PopularFragment;
+
+import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,8 +19,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class FavouriteFragment extends Fragment {
+public class FavouriteFragment extends Fragment implements PopularAdapter.ItemClickListener{
 
+
+    private PopularAdapter adapter;
+
+    private ArrayList<PhotoModel> photos = new ArrayList<>();
 
     public static FavouriteFragment newInstance() {
         return new FavouriteFragment();
@@ -38,16 +44,18 @@ public class FavouriteFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.rvPhotos);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), PopularFragment.NUMBER_OF_COLUMNS));
 
-        final FavouriteAdapter adapter = new FavouriteAdapter();
+        adapter = new PopularAdapter(getActivity(), photos);
+        adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
-
         FavouriteViewModel photoViewModel = ViewModelProviders.of(this).get(FavouriteViewModel.class);
-        photoViewModel.getAllNotes().observe(this, adapter::submitList);
-        adapter.setOnItemClickListener(this::startDetails);
+        photoViewModel.getAllNotes().observe(this, list -> {
+            photos.addAll(list);
+            adapter.notifyDataSetChanged();
+        });
     }
 
 
-    private void startDetails(PhotoDBModel photo) {
+    private void startDetails(PhotoModel photo) {
         DetailsFragment nextFrag = new DetailsFragment();
         Bundle args = new Bundle();
         args.putString(DetailsFragment.EXTRA_URL, photo.getUrlS());
@@ -59,5 +67,10 @@ public class FavouriteFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
 
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        startDetails(photos.get(position));
     }
 }

@@ -10,6 +10,11 @@ public class PhotoModel {
     @SerializedName("url_s")
     private String urlS;
 
+    public PhotoModel(long id, String urlS) {
+        this.id = id;
+        this.urlS = urlS;
+    }
+
     public long getId() {
         return id;
     }

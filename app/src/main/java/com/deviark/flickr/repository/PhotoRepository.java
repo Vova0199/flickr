@@ -25,17 +25,17 @@ import retrofit2.Response;
 public class PhotoRepository {
     private PhotoDAO mPhotoDAO;
     private LiveData<List<PhotoDBModel>> mPhotoList;
+
     private static final String TAG = PhotoRepository.class.getSimpleName();
     private ApiService apiRequest;
 
     public PhotoRepository(Application application) {
         PhotoDatabase database = PhotoDatabase.getInstance(application);
+        apiRequest = RetrofitRequest.getRetrofitInstance().create(ApiService.class);
         mPhotoDAO = database.photoDAO();
         mPhotoList = mPhotoDAO.getAllPhotos();
-        apiRequest = RetrofitRequest.getRetrofitInstance().create(ApiService.class);
 
     }
-
 
     public void insert(PhotoDBModel photo) {
         new InsertPhotoAsyncTask(mPhotoDAO).execute(photo);
