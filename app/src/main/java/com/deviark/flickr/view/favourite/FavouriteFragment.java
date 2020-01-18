@@ -1,4 +1,4 @@
-package com.deviark.flickr.view;
+package com.deviark.flickr.view.favourite;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 
 import com.deviark.flickr.R;
 import com.deviark.flickr.view.Adapters.FavouriteAdapter;
-import com.deviark.flickr.ViewModel.FavouriteViewModel;
+import com.deviark.flickr.view.DetailsFragment;
 import com.deviark.flickr.models.PhotoDBModel;
+import com.deviark.flickr.view.popular.PopularFragment;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -19,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class FavouriteFragment extends Fragment {
 
 
-    static FavouriteFragment newInstance() {
+    public static FavouriteFragment newInstance() {
         return new FavouriteFragment();
     }
 

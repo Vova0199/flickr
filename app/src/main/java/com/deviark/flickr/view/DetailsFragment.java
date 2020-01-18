@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.deviark.flickr.R;
-import com.deviark.flickr.ViewModel.FavouriteViewModel;
+import com.deviark.flickr.view.favourite.FavouriteViewModel;
 import com.deviark.flickr.models.PhotoDBModel;
 import com.squareup.picasso.Picasso;
 
@@ -17,8 +17,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 
 public class DetailsFragment extends Fragment {
-    static final String EXTRA_ID = "com.deviark.flickr.EXTRA_ID";
-    static final String EXTRA_URL = "com.deviark.flickr.EXTRA_URL";
+    public static final String EXTRA_ID = "com.deviark.flickr.EXTRA_ID";
+    public static final String EXTRA_URL = "com.deviark.flickr.EXTRA_URL";
     private ImageView ivPhoto, ivFavourite;
     private Button btnSave;
     private String imageUrl;

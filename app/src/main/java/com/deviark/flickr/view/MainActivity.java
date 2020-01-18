@@ -3,6 +3,8 @@ package com.deviark.flickr.view;
 import android.os.Bundle;
 
 import com.deviark.flickr.R;
+import com.deviark.flickr.view.favourite.FavouriteFragment;
+import com.deviark.flickr.view.popular.PopularFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

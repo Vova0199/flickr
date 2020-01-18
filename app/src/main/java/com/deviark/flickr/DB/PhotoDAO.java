@@ -24,5 +24,6 @@ public interface PhotoDAO {
 
     @Query("SELECT * FROM photo_table ")
     LiveData<List<PhotoDBModel>> getAllPhotos();
+
 }
 

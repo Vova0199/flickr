@@ -1,4 +1,4 @@
-package com.deviark.flickr.ViewModel;
+package com.deviark.flickr.view.popular;
 
 import android.app.Application;
 
@@ -21,7 +21,7 @@ public class PopularViewModel extends AndroidViewModel {
         this.articleResponseLiveData = repository.getPhotosFromAPI();
     }
 
-    public LiveData<List<PhotoModel>> getArticleResponseLiveData() {
+    LiveData<List<PhotoModel>> getArticleResponseLiveData() {
         return articleResponseLiveData;
     }
 }

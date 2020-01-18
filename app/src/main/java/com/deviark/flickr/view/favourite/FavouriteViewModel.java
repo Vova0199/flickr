@@ -1,4 +1,4 @@
-package com.deviark.flickr.ViewModel;
+package com.deviark.flickr.view.favourite;
 
 import android.app.Application;
 
@@ -44,7 +44,7 @@ public class FavouriteViewModel extends AndroidViewModel {
         return searchByLiveData;
     }
 
-    public LiveData<List<PhotoDBModel>> getAllNotes() {
+    LiveData<List<PhotoDBModel>> getAllNotes() {
         return allNotes;
     }
 }

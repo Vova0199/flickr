@@ -1,4 +1,4 @@
-package com.deviark.flickr.view;
+package com.deviark.flickr.view.popular;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 
 import com.deviark.flickr.R;
 import com.deviark.flickr.view.Adapters.PopularAdapter;
-import com.deviark.flickr.ViewModel.PopularViewModel;
 import com.deviark.flickr.models.PhotoModel;
+import com.deviark.flickr.view.DetailsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +21,14 @@ import io.reactivex.annotations.NonNull;
 
 public class PopularFragment extends Fragment implements PopularAdapter.ItemClickListener {
 
-    static final int NUMBER_OF_COLUMNS = 3;
+    public static final int NUMBER_OF_COLUMNS = 3;
     private PopularAdapter adapter;
     @NonNull
     private PopularViewModel photoViewModel;
 
     private ArrayList<PhotoModel> photos = new ArrayList<>();
 
-    static PopularFragment newInstance() {
+    public static PopularFragment newInstance() {
         return new PopularFragment();
     }
 

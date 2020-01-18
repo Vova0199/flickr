@@ -21,6 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+
 public class PhotoRepository {
     private PhotoDAO mPhotoDAO;
     private LiveData<List<PhotoDBModel>> mPhotoList;
@@ -34,6 +35,7 @@ public class PhotoRepository {
         apiRequest = RetrofitRequest.getRetrofitInstance().create(ApiService.class);
 
     }
+
 
     public void insert(PhotoDBModel photo) {
         new InsertPhotoAsyncTask(mPhotoDAO).execute(photo);
